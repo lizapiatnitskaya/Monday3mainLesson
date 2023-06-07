@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState}  from 'react';
 import {FilterValuesType} from './App';
 import { KeyboardEvent } from 'react';
+import { Button } from './Button';
 
 type TaskType = {
     id: string
@@ -49,21 +50,21 @@ export function Todolist(props: PropsType) {
         <h3>{props.title}</h3>
         <div>
             <input value={newTitle} onKeyDown={onKeyDownHandler} onChange={onChangeClickHandler}/>
-            <button onClick={onClickHandler}>+</button>
+            <Button name='+' callBack={onClickHandler}/>
         </div>
         <ul>
             {
                 props.tasks.map(t => <li key={t.id}>
                     <input type="checkbox" checked={t.isDone}/>
                     <span>{t.title}</span>
-                    <button onClick={ () => { removeTask(t) } }>x</button>
+                    <Button name="x" callBack={()=>removeTask(t)}/>
                 </li>)
             }
         </ul>
         <div>
-            <button onClick={ () => { changeFilter("all") } }>All</button>
-            <button onClick={ () => { changeFilter("active")} }>Active</button>
-            <button onClick={ () => { changeFilter("completed") } }>Complete</button>
+            <Button name={"All"} callBack={()=>changeFilter("all")}/>
+            <Button name={"Active"} callBack={()=>changeFilter("active")}/>
+            <Button name={"Completed"} callBack={()=>changeFilter("completed")}/>
         </div>
     </div>
 }
